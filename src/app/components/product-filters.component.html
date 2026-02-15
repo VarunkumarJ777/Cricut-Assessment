@@ -1,0 +1,35 @@
+<form class="filters" (submit)="$event.preventDefault()">
+  <label>
+    Search
+    <input
+      type="text"
+      [formControl]="searchControl"
+      (input)="onSearchInput($event)"
+      placeholder="Find by title, brand, or keyword"
+    />
+  </label>
+
+  <label>
+    Category
+    <select [formControl]="categoryControl" (change)="onCategoryChange($event)">
+      <option value="all">All categories</option>
+      @for (category of categoryOptions; track category) {
+        <option [value]="category">{{ category }}</option>
+      }
+    </select>
+  </label>
+
+  <label>
+    Sort
+    <select [formControl]="sortControl" (change)="onSortChange($event)">
+      @for (option of sortOptions; track option.value) {
+        <option [value]="option.value">{{ option.label }}</option>
+      }
+    </select>
+  </label>
+
+  <div class="actions">
+    <button type="button" class="reset-btn" (click)="reset()">Reset filters</button>
+    <button type="button" class="refresh-btn" (click)="refresh()">Refresh results</button>
+  </div>
+</form>

@@ -1,0 +1,80 @@
+<ul class="product-list">
+  @for (product of products; track trackById($index, product)) {
+    <li
+      class="product-card"
+      role="button"
+      tabindex="0"
+      (click)="openPreview(product)"
+      (keydown.enter)="openPreview(product)"
+      (keydown.space)="$event.preventDefault(); openPreview(product)"
+    >
+      <div class="media">
+        <img [src]="product.thumbnail" [alt]="product.title" loading="lazy" />
+        <span class="sale-badge">Sale</span>
+      </div>
+
+      <div class="content">
+        <header>
+          <div>
+            <h3>{{ product.title }}</h3>
+            <p class="brand">{{ product.brand }}</p>
+          </div>
+          <span class="rating">{{ formatRating(product.rating) }} ★</span>
+        </header>
+
+        <p class="description">{{ getDescriptionText(product) }}</p>
+        @if (isDescriptionLong(product)) {
+          <button
+            type="button"
+            class="description-toggle"
+            (click)="toggleDescription(product.id); $event.stopPropagation()"
+          >
+            {{ isExpanded(product.id) ? 'Show less' : 'Show more' }}
+          </button>
+        }
+
+        <dl>
+          <div>
+            <dt>Price</dt>
+            <dd class="price">
+              <span class="now">${{ product.price }}</span>
+              <span class="was">${{ getOriginalPrice(product.price) }}</span>
+            </dd>
+          </div>
+          <div>
+            <dt>Stock</dt>
+            <dd>{{ product.stock }}</dd>
+          </div>
+        </dl>
+      </div>
+    </li>
+  }
+</ul>
+
+@if (selectedProduct; as product) {
+  <div class="modal-backdrop" (click)="closePreview()"></div>
+  <section
+    class="preview-modal"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-label]="product.title"
+    tabindex="0"
+    (keydown.escape)="closePreview()"
+  >
+    <button type="button" class="close-btn" aria-label="Close preview" (click)="closePreview()">&#x2715;</button>
+    <img [src]="product.thumbnail" [alt]="product.title" />
+    <h3>{{ product.title }}</h3>
+    <p class="modal-brand">{{ product.brand }}</p>
+    <p class="modal-description">{{ product.description }}</p>
+    <dl class="modal-meta">
+      <div>
+        <dt>Category</dt>
+        <dd>{{ product.category }}</dd>
+      </div>
+      <div>
+        <dt>Rating</dt>
+        <dd>{{ formatRating(product.rating) }} ★</dd>
+      </div>
+    </dl>
+  </section>
+}

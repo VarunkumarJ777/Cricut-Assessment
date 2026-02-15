@@ -1,0 +1,93 @@
+.filters {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+  gap: 0.62rem;
+  align-items: end;
+}
+
+label {
+  display: grid;
+  gap: 0.34rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-soft);
+  font-weight: 700;
+}
+
+input,
+select,
+button {
+  font: inherit;
+  border-radius: var(--radius-sm);
+}
+
+input,
+select {
+  width: 100%;
+  border: 1px solid var(--border);
+  padding: 0.64rem 0.72rem;
+  background: var(--surface-soft);
+  color: var(--text);
+}
+
+input::placeholder {
+  color: #8e8e93;
+}
+
+input:focus,
+select:focus {
+  outline: 2px solid transparent;
+  border-color: #8bbdff;
+  box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.12);
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.45rem;
+}
+
+button {
+  border: 1px solid #0060c2;
+  background: linear-gradient(180deg, #0a84ff 0%, #0071e3 100%);
+  color: #ffffff;
+  padding: 0.66rem 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:hover {
+  background: linear-gradient(180deg, #1d8fff 0%, #0c7be8 100%);
+}
+
+.reset-btn {
+  border-color: var(--border);
+  background: #ffffff;
+  color: var(--text-muted);
+}
+
+.reset-btn:hover {
+  background: #f6f8fc;
+}
+
+@media (max-width: 920px) {
+  .filters {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .actions {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 620px) {
+  .filters {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    grid-column: auto;
+    grid-template-columns: 1fr;
+  }
+}

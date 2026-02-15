@@ -1,0 +1,90 @@
+<main class="dashboard">
+  @if (vm$ | async; as vm) {
+    <section class="hero-banner" aria-label="sale banner">
+      <img
+        src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1600&q=80"
+        alt="Colorful crafting supplies on a table"
+        loading="eager"
+      />
+      <div class="hero-overlay">
+        <p>Featured</p>
+        <h1>Shop Smart, Save More</h1>
+        <div class="hero-stats">
+          <span>{{ vm.totalCount }} products</span>
+          <span>{{ vm.filteredCount }} visible</span>
+          <span>{{ vm.activeCategory === 'all' ? 'All categories' : vm.activeCategory }}</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="results-head">
+      <h2>Products</h2>
+      <p>{{ vm.filteredCount }} results</p>
+    </section>
+
+    <section class="category-rail">
+      <button
+        type="button"
+        [class.active]="vm.activeCategory === 'all'"
+        (click)="selectCategory('all')"
+      >
+        All
+      </button>
+      @for (category of vm.categoryOptions; track category) {
+        <button
+          type="button"
+          [class.active]="vm.activeCategory === category"
+          (click)="selectCategory(category)"
+        >
+          {{ category }}
+        </button>
+      }
+    </section>
+
+    <section class="panel top-controls" aria-label="catalog controls">
+      <section class="metrics" aria-label="summary metrics">
+        <article class="metric">
+          <p class="label">Total Products</p>
+          <p class="value">{{ vm.totalCount }}</p>
+        </article>
+        <article class="metric">
+          <p class="label">Visible Results</p>
+          <p class="value">{{ vm.filteredCount }}</p>
+        </article>
+        <article class="metric">
+          <p class="label">Category</p>
+          <p class="value small">{{ vm.activeCategory === 'all' ? 'All' : vm.activeCategory }}</p>
+        </article>
+      </section>
+
+      <section class="filters-panel" aria-label="filters">
+        <h2>Shop Filters</h2>
+        <app-product-filters
+          [searchControl]="searchControl"
+          [categoryControl]="categoryControl"
+          [sortControl]="sortControl"
+          [categoryOptions]="vm.categoryOptions"
+          (searchChange)="onSearchChanged($event)"
+          (categoryChange)="onCategoryChanged($event)"
+          (sortChange)="onSortChanged($event)"
+          (refreshClick)="refreshProducts()"
+          (resetClick)="resetFilters()"
+        />
+      </section>
+    </section>
+
+    <section class="content">
+      @if (vm.status === 'loading') {
+        <p class="status">Loading products...</p>
+      } @else if (vm.status === 'error') {
+        <p class="status error">{{ vm.errorMessage }}</p>
+      } @else if (vm.filteredCount === 0) {
+        <p class="status">No products match the current filters.</p>
+      } @else {
+        <section class="panel list-panel">
+          <app-product-list [products]="vm.products" />
+        </section>
+      }
+    </section>
+  }
+</main>
