@@ -6,6 +6,71 @@
   gap: 1rem;
 }
 
+.site-header {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: var(--shadow-sm);
+  padding: 0.75rem 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.72rem;
+}
+
+.logo-mark {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  font-weight: 800;
+  color: #ffffff;
+  background: linear-gradient(160deg, #111827 0%, #0f766e 100%);
+}
+
+.brand-name {
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: #111827;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.brand-tagline {
+  margin-top: 0.06rem;
+  font-size: 0.72rem;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+
+.store-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: #475569;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.cart-pill {
+  border: 1px solid #99f6e4;
+  background: #ecfeff;
+  color: #0f766e;
+  border-radius: 999px;
+  padding: 0.2rem 0.55rem;
+}
+
 .hero-banner {
   position: relative;
   border-radius: var(--radius-lg);
@@ -34,16 +99,24 @@
   color: #ffffff;
 }
 
-.hero-overlay p {
-  font-size: 0.74rem;
+.hero-overlay h1 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  line-height: 1.05;
+}
+
+.promo-kicker {
+  font-size: 0.85rem;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.2em;
   font-weight: 800;
 }
 
-.hero-overlay h1 {
-  font-size: clamp(1.8rem, 2.8vw, 2.6rem);
-  font-weight: 600;
+.promo-subtitle {
+  margin-top: 0.15rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.92);
 }
 
 .hero-stats {
@@ -196,6 +269,17 @@
 @media (max-width: 760px) {
   .dashboard {
     padding: 1rem 0.72rem 1.3rem;
+  }
+
+  .site-header {
+    padding: 0.62rem 0.72rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .store-tools {
+    width: 100%;
+    justify-content: space-between;
   }
 
   .hero-banner,

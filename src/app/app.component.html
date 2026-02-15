@@ -1,4 +1,14 @@
 <main class="dashboard">
+  <!-- <header class="site-header" aria-label="site identity"> -->
+    <div class="brand">
+      <span class="logo-mark" aria-hidden="true">AOS</span>
+      <div>
+        <p class="brand-name">ALL in one stop</p>
+        <p class="brand-tagline">Official Store</p>
+      </div>
+    </div>
+  <!-- </header> -->
+
   @if (vm$ | async; as vm) {
     <section class="hero-banner" aria-label="sale banner">
       <img
@@ -7,8 +17,9 @@
         loading="eager"
       />
       <div class="hero-overlay">
-        <p>Featured</p>
-        <h1>Shop Smart, Save More</h1>
+        <p class="promo-kicker">ALL in one stop</p>
+        <h1>UP TO 30% OFF</h1>
+        <p class="promo-subtitle">Shop across all categories in one place</p>
         <div class="hero-stats">
           <span>{{ vm.totalCount }} products</span>
           <span>{{ vm.filteredCount }} visible</span>
